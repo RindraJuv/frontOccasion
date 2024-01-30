@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { CCard, CCardBody } from '@coreui/react';
-import { CChartLine } from '@coreui/react-chartjs';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react'
+import { CCard, CCardBody } from '@coreui/react'
+import { CChartLine } from '@coreui/react-chartjs'
+import axios from 'axios'
 
 const StatsComponent = () => {
   const [chartData, setChartData] = useState({
@@ -18,23 +18,23 @@ const StatsComponent = () => {
         data: [],
       },
     ],
-  });
+  })
 
   useEffect(() => {
-    fetchStatsData();
-  }, []);
+    fetchStatsData()
+  }, [])
 
   const fetchStatsData = async () => {
     try {
-      const response = await axios.get('https://occasion1-production.up.railway.app/userstats');
-      const data = response.data; 
-  
-      const labels = data.map(entry => `${entry.monthAbbreviated} ${entry.year}`);
-      const registrations = data.map(entry => entry.numberOfRegistrations);
-  
-      console.log("Labels:", labels);
-      console.log("Registrations:", registrations);
-  
+      const response = await axios.get('https://occasion1-production.up.railway.app/userstats')
+      const data = response.data
+
+      const labels = data.map((entry) => `${entry.monthAbbreviated} ${entry.year}`)
+      const registrations = data.map((entry) => entry.numberOfRegistrations)
+
+      console.log('Labels:', labels)
+      console.log('Registrations:', registrations)
+
       setChartData({
         ...chartData,
         labels: labels,
@@ -44,13 +44,11 @@ const StatsComponent = () => {
             data: registrations,
           },
         ],
-      });
+      })
     } catch (error) {
-      console.error('Error fetching stats data:', error);
+      console.error('Error fetching stats data:', error)
     }
-  };
-  
-  
+  }
 
   return (
     <>
@@ -98,7 +96,7 @@ const StatsComponent = () => {
         </CCardBody>
       </CCard>
     </>
-  );
-};
+  )
+}
 
-export default StatsComponent;
+export default StatsComponent

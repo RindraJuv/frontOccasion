@@ -1,27 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { CCard, CCardBody } from '@coreui/react';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { CCard, CCardBody } from '@coreui/react'
 
 const Widgets = () => {
-  const [commissionData, setCommissionData] = useState([]);
+  const [commissionData, setCommissionData] = useState([])
 
   useEffect(() => {
-    fetchCommissionData();
-  }, []);
+    fetchCommissionData()
+  }, [])
 
   const fetchCommissionData = async () => {
     try {
-      const response = await axios.get('https://occasion1-production.up.railway.app/commissions/monthly-report');
-      const data = response.data;
-      setCommissionData(data);
+      const response = await axios.get(
+        'https://occasion1-production.up.railway.app/commissions/monthly-report',
+      )
+      const data = response.data
+      setCommissionData(data)
     } catch (error) {
-      console.error('Error fetching commission data:', error);
+      console.error('Error fetching commission data:', error)
     }
-  };
-  
+  }
+
   return (
     <>
-      <h1 style={{ marginBottom: '20px', color: '#333', textAlign: 'center', textDecoration: 'underline' }}>Etat Financiers par Mois</h1>
+      <h1
+        style={{
+          marginBottom: '20px',
+          color: '#333',
+          textAlign: 'center',
+          textDecoration: 'underline',
+        }}
+      >
+        Etat Financiers par Mois
+      </h1>
       <CCard className="mb-4">
         <CCardBody>
           <div className="table-responsive">
@@ -47,7 +58,7 @@ const Widgets = () => {
         </CCardBody>
       </CCard>
     </>
-  );
-};
+  )
+}
 
-export default Widgets;
+export default Widgets

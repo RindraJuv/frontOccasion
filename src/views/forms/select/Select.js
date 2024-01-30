@@ -1,70 +1,87 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { CButton, CCard, CCardBody, CCardGroup, CCol, CContainer, CForm, CFormInput, CInputGroup, CRow } from '@coreui/react';
-import Modal from 'react-modal'; 
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import {
+  CButton,
+  CCard,
+  CCardBody,
+  CCardGroup,
+  CCol,
+  CContainer,
+  CForm,
+  CFormInput,
+  CInputGroup,
+  CRow,
+} from '@coreui/react'
+import Modal from 'react-modal'
 
 const Select = () => {
-  const [categories, setCategories] = useState([]);
-  const [newCategoryName, setNewCategoryName] = useState('');
-  const [editCategoryId, setEditCategoryId] = useState(null);
-  const [editCategoryName, setEditCategoryName] = useState('');
+  const [categories, setCategories] = useState([])
+  const [newCategoryName, setNewCategoryName] = useState('')
+  const [editCategoryId, setEditCategoryId] = useState(null)
+  const [editCategoryName, setEditCategoryName] = useState('')
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
+    fetchCategories()
+  }, [])
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('https://occasion1-production.up.railway.app/categories');
-      setCategories(response.data);
+      const response = await axios.get('https://occasion1-production.up.railway.app/categories')
+      setCategories(response.data)
     } catch (error) {
-      console.error('Error fetching categories:', error);
+      console.error('Error fetching categories:', error)
     }
-  };
+  }
 
   const addCategory = async () => {
     try {
-      await axios.post('https://occasion1-production.up.railway.app/categories', { categorieName: newCategoryName });
-      setNewCategoryName('');
-      fetchCategories();
+      await axios.post('https://occasion1-production.up.railway.app/categories', {
+        categorieName: newCategoryName,
+      })
+      setNewCategoryName('')
+      fetchCategories()
     } catch (error) {
-      console.error('Error adding category:', error);
+      console.error('Error adding category:', error)
     }
-  };
+  }
 
   const deleteCategory = async (id) => {
     try {
-      await axios.delete('https://occasion1-production.up.railway.app/categories/${id}');
-      fetchCategories();
+      await axios.delete('https://occasion1-production.up.railway.app/categories/${id}')
+      fetchCategories()
     } catch (error) {
-      console.error('Error deleting category:', error);
+      console.error('Error deleting category:', error)
     }
-  };
+  }
 
   const editCategory = async (id, newName) => {
     try {
-      await axios.put('https://occasion1-production.up.railway.app/categories/${id}', { categorieName: newName });
-      fetchCategories();
+      await axios.put('https://occasion1-production.up.railway.app/categories/${id}', {
+        categorieName: newName,
+      })
+      fetchCategories()
     } catch (error) {
-      console.error('Error editing category:', error);
+      console.error('Error editing category:', error)
     }
-  };
+  }
 
   const handleEditCategory = async (id, currentName) => {
-    setEditCategoryId(id);
-    setEditCategoryName(currentName);
-  };
+    setEditCategoryId(id)
+    setEditCategoryName(currentName)
+  }
 
   const handleSaveEdit = async () => {
     try {
-      await axios.put('https://occasion1-production.up.railway.app/categories/${editCategoryId}', { categorieName: editCategoryName });
-      fetchCategories();
-      setEditCategoryId(null);
-      setEditCategoryName('');
+      await axios.put('https://occasion1-production.up.railway.app/categories/${editCategoryId}', {
+        categorieName: editCategoryName,
+      })
+      fetchCategories()
+      setEditCategoryId(null)
+      setEditCategoryName('')
     } catch (error) {
-      console.error('Error editing category:', error);
+      console.error('Error editing category:', error)
     }
-  };
+  }
 
   return (
     <div className="bg-light min-vh-88 d-flex flex-row align-items-center">
@@ -222,10 +239,8 @@ const Select = () => {
           </button>
         </div>
       </Modal>
-
-
     </div>
-  );
-};
+  )
+}
 
-export default Select;
+export default Select

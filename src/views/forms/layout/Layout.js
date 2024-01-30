@@ -1,69 +1,84 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { CButton, CCard, CCardBody, CCardGroup, CCol, CContainer, CForm, CFormInput, CInputGroup, CRow } from '@coreui/react';
-import Modal from 'react-modal';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import {
+  CButton,
+  CCard,
+  CCardBody,
+  CCardGroup,
+  CCol,
+  CContainer,
+  CForm,
+  CFormInput,
+  CInputGroup,
+  CRow,
+} from '@coreui/react'
+import Modal from 'react-modal'
 
 const MarqueCrud = () => {
-  const [marques, setMarques] = useState([]);
-  const [newMarqueName, setNewMarqueName] = useState('');
-  const [editMarqueId, setEditMarqueId] = useState(null);
-  const [editMarqueName, setEditMarqueName] = useState('');
+  const [marques, setMarques] = useState([])
+  const [newMarqueName, setNewMarqueName] = useState('')
+  const [editMarqueId, setEditMarqueId] = useState(null)
+  const [editMarqueName, setEditMarqueName] = useState('')
 
   useEffect(() => {
-    fetchMarques();
-  }, []);
+    fetchMarques()
+  }, [])
 
   const fetchMarques = async () => {
     try {
-      const response = await axios.get('https://occasion1-production.up.railway.app/marques');
-      setMarques(response.data);
+      const response = await axios.get('https://occasion1-production.up.railway.app/marques')
+      setMarques(response.data)
     } catch (error) {
-      console.error('Error fetching marques:', error);
+      console.error('Error fetching marques:', error)
     }
-  };
+  }
 
   const addMarque = async () => {
     try {
-      await axios.post('https://occasion1-production.up.railway.app/marques', { marqueName: newMarqueName });
-      setNewMarqueName('');
-      fetchMarques();
+      await axios.post('https://occasion1-production.up.railway.app/marques', {
+        marqueName: newMarqueName,
+      })
+      setNewMarqueName('')
+      fetchMarques()
     } catch (error) {
-      console.error('Error adding marque:', error);
+      console.error('Error adding marque:', error)
     }
-  };
+  }
 
   const deleteMarque = async (id) => {
     try {
-      await axios.delete('https://occasion1-production.up.railway.app/marques/${id}');
-      fetchMarques();
+      await axios.delete('https://occasion1-production.up.railway.app/marques/${id}')
+      fetchMarques()
     } catch (error) {
-      console.error('Error deleting marque:', error);
+      console.error('Error deleting marque:', error)
     }
-  };
+  }
 
   const editMarque = async (id, newName) => {
     try {
-      await axios.put('https://occasion1-production.up.railway.app/marques/${id}', { marqueName: newName });
-      fetchMarques();
+      await axios.put('https://occasion1-production.up.railway.app/marques/${id}', {
+        marqueName: newName,
+      })
+      fetchMarques()
     } catch (error) {
-      console.error('Error editing marque:', error);
+      console.error('Error editing marque:', error)
     }
-  };
+  }
 
   const handleEditMarque = async (id, currentName) => {
-    setEditMarqueId(id);
-    setEditMarqueName(currentName);
-  };
+    setEditMarqueId(id)
+    setEditMarqueName(currentName)
+  }
 
   const handleSaveEdit = async () => {
     try {
-      await editMarque(editMarqueId, editMarqueName);
-      setEditMarqueId(null);
-      setEditMarqueName('');
+      await editMarque(editMarqueId, editMarqueName)
+      setEditMarqueId(null)
+      setEditMarqueName('')
     } catch (error) {
-      console.error('Error saving edited marque:', error);
+      console.error('Error saving edited marque:', error)
     }
-  };
+  }
 
   return (
     <div className="bg-light min-vh-88 d-flex flex-row align-items-center">
@@ -222,7 +237,7 @@ const MarqueCrud = () => {
         </div>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default MarqueCrud;
+export default MarqueCrud

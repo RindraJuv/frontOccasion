@@ -1,39 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { CCard, CCardHeader, CCardBody, CButton } from '@coreui/react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { CCard, CCardHeader, CCardBody, CButton } from '@coreui/react'
+import axios from 'axios'
 
 const AnnoncesList = () => {
-  const [annonces, setAnnonces] = useState([]);
+  const [annonces, setAnnonces] = useState([])
 
   useEffect(() => {
-    fetchAnnonces();
-  }, []);
+    fetchAnnonces()
+  }, [])
 
   const fetchAnnonces = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/annoncesDetails');
-      setAnnonces(response.data);
+      const response = await axios.get('http://localhost:8080/annoncesDetails')
+      setAnnonces(response.data)
     } catch (error) {
-      console.error('Error fetching annonces:', error);
+      console.error('Error fetching annonces:', error)
     }
-  };
+  }
 
   const validerAnnonce = async (idAnnonce) => {
     try {
-      await axios.post(`http://localhost:8080/status/valider/${idAnnonce}`);
-      const updatedAnnonces = annonces.filter((annonce) => annonce.idAnnonce !== idAnnonce);
-      setAnnonces(updatedAnnonces);
+      await axios.post(`http://localhost:8080/status/valider/${idAnnonce}`)
+      const updatedAnnonces = annonces.filter((annonce) => annonce.idAnnonce !== idAnnonce)
+      setAnnonces(updatedAnnonces)
     } catch (error) {
-      console.error('Error validating annonce:', error);
+      console.error('Error validating annonce:', error)
     }
-  };
+  }
 
   return (
     <>
       <CCard className="mb-4">
-        <CCardHeader>
-          Voici les listes des Annonces que vous disposez
-        </CCardHeader>
+        <CCardHeader>Voici les listes des Annonces que vous disposez</CCardHeader>
         <CCardBody>
           <table className="table">
             <thead>
@@ -60,7 +58,7 @@ const AnnoncesList = () => {
                     <CButton
                       color="danger"
                       onClick={() => validerAnnonce(annonce.idAnnonce)}
-                      disabled={annonce.valide} 
+                      disabled={annonce.valide}
                     >
                       Valider
                     </CButton>
@@ -72,7 +70,7 @@ const AnnoncesList = () => {
         </CCardBody>
       </CCard>
     </>
-  );
-};
+  )
+}
 
-export default AnnoncesList;
+export default AnnoncesList

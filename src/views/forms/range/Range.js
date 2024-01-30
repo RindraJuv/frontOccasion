@@ -1,70 +1,87 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { CButton, CCard, CCardBody, CCardGroup, CCol, CContainer, CForm, CFormInput, CInputGroup, CRow } from '@coreui/react';
-import Modal from 'react-modal'; 
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import {
+  CButton,
+  CCard,
+  CCardBody,
+  CCardGroup,
+  CCol,
+  CContainer,
+  CForm,
+  CFormInput,
+  CInputGroup,
+  CRow,
+} from '@coreui/react'
+import Modal from 'react-modal'
 
 const ModelCrud = () => {
-  const [models, setModels] = useState([]);
-  const [newModelName, setNewModelName] = useState('');
-  const [editModelId, setEditModelId] = useState(null);
-  const [editModelName, setEditModelName] = useState('');
+  const [models, setModels] = useState([])
+  const [newModelName, setNewModelName] = useState('')
+  const [editModelId, setEditModelId] = useState(null)
+  const [editModelName, setEditModelName] = useState('')
 
   useEffect(() => {
-    fetchModels();
-  }, []);
+    fetchModels()
+  }, [])
 
   const fetchModels = async () => {
     try {
-      const response = await axios.get('https://occasion1-production.up.railway.app/models');
-      setModels(response.data);
+      const response = await axios.get('https://occasion1-production.up.railway.app/models')
+      setModels(response.data)
     } catch (error) {
-      console.error('Error fetching models:', error);
+      console.error('Error fetching models:', error)
     }
-  };
+  }
 
   const addModel = async () => {
     try {
-      await axios.post('https://occasion1-production.up.railway.app/models', { modelName: newModelName });
-      setNewModelName('');
-      fetchModels();
+      await axios.post('https://occasion1-production.up.railway.app/models', {
+        modelName: newModelName,
+      })
+      setNewModelName('')
+      fetchModels()
     } catch (error) {
-      console.error('Error adding model:', error);
+      console.error('Error adding model:', error)
     }
-  };
+  }
 
   const deleteModel = async (id) => {
     try {
-      await axios.delete('https://occasion1-production.up.railway.app/models/${id}');
-      fetchModels();
+      await axios.delete('https://occasion1-production.up.railway.app/models/${id}')
+      fetchModels()
     } catch (error) {
-      console.error('Error deleting model:', error);
+      console.error('Error deleting model:', error)
     }
-  };
+  }
 
   const editModel = async (id, newName) => {
     try {
-      await axios.put('https://occasion1-production.up.railway.app/models/${id}', { modelName: newName });
-      fetchModels();
+      await axios.put('https://occasion1-production.up.railway.app/models/${id}', {
+        modelName: newName,
+      })
+      fetchModels()
     } catch (error) {
-      console.error('Error editing model:', error);
+      console.error('Error editing model:', error)
     }
-  };
+  }
 
   const handleEditModel = async (id, currentName) => {
-    setEditModelId(id);
-    setEditModelName(currentName);
-  };
+    setEditModelId(id)
+    setEditModelName(currentName)
+  }
 
   const handleSaveEdit = async () => {
     try {
-      await axios.put('https://occasion1-production.up.railway.app/models/${editModelId}', { modelName: editModelName });
-      fetchModels();
-      setEditModelId(null);
-      setEditModelName('');
+      await axios.put('https://occasion1-production.up.railway.app/models/${editModelId}', {
+        modelName: editModelName,
+      })
+      fetchModels()
+      setEditModelId(null)
+      setEditModelName('')
     } catch (error) {
-      console.error('Error editing model:', error);
+      console.error('Error editing model:', error)
     }
-  };
+  }
 
   return (
     <div className="bg-light min-vh-88 d-flex flex-row align-items-center">
@@ -223,7 +240,7 @@ const ModelCrud = () => {
         </div>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default ModelCrud;
+export default ModelCrud

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -11,63 +11,68 @@ import {
   CForm,
   CFormInput,
   CInputGroup,
-  CRow
-} from '@coreui/react';
-import Modal from 'react-modal';
+  CRow,
+} from '@coreui/react'
+import Modal from 'react-modal'
 
 const CommissionCrud = () => {
-  const [commissions, setCommissions] = useState([]);
-  const [newCommissionName, setNewCommissionName] = useState('');
-  const [editCommissionId, setEditCommissionId] = useState(null);
-  const [editCommissionName, setEditCommissionName] = useState('');
+  const [commissions, setCommissions] = useState([])
+  const [newCommissionName, setNewCommissionName] = useState('')
+  const [editCommissionId, setEditCommissionId] = useState(null)
+  const [editCommissionName, setEditCommissionName] = useState('')
 
   useEffect(() => {
-    fetchCommissions();
-  }, []);
+    fetchCommissions()
+  }, [])
 
   const fetchCommissions = async () => {
     try {
-      const response = await axios.get('https://occasion1-production.up.railway.app/commissions');
-      setCommissions(response.data);
+      const response = await axios.get('https://occasion1-production.up.railway.app/commissions')
+      setCommissions(response.data)
     } catch (error) {
-      console.error('Error fetching commissions:', error);
+      console.error('Error fetching commissions:', error)
     }
-  };
+  }
 
   const addCommission = async () => {
     try {
-      await axios.post('https://occasion1-production.up.railway.app/commissions', { marge: newCommissionName });
-      setNewCommissionName('');
-      fetchCommissions();
+      await axios.post('https://occasion1-production.up.railway.app/commissions', {
+        marge: newCommissionName,
+      })
+      setNewCommissionName('')
+      fetchCommissions()
     } catch (error) {
-      console.error('Error adding commission:', error);
+      console.error('Error adding commission:', error)
     }
-  };
+  }
 
   const deleteCommission = async (id) => {
     try {
-      await axios.delete('https://occasion1-production.up.railway.app/commissions/${id}');
-      fetchCommissions();
+      await axios.delete('https://occasion1-production.up.railway.app/commissions/${id}')
+      fetchCommissions()
     } catch (error) {
-      console.error('Error deleting commission:', error);
+      console.error('Error deleting commission:', error)
     }
-  };
+  }
 
   const handleEditCommission = async (id, currentName) => {
-    setEditCommissionId(id);
-    setEditCommissionName(currentName);
-  };
+    setEditCommissionId(id)
+    setEditCommissionName(currentName)
+  }
 
   const handleSaveEdit = async () => {
     try {
-      await axios.put('https://occasion1-production.up.railway.app/commissions/${editCommissionId}', { marge: editCommissionName });
-      fetchCommissions();
-      setEditCommissionId(null);
-      setEditCommissionName('');
+      await axios.put(
+        'https://occasion1-production.up.railway.app/commissions/${editCommissionId}',
+        { marge: editCommissionName },
+      )
+      fetchCommissions()
+      setEditCommissionId(null)
+      setEditCommissionName('')
     } catch (error) {
-      console.error('Error editing commission:', error);
+      console.error('Error editing commission:', error)
     }
-  };
+  }
 
   return (
     <div className="bg-light min-vh-88 d-flex flex-row align-items-center">
@@ -226,7 +231,7 @@ const CommissionCrud = () => {
         </div>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default CommissionCrud;
+export default CommissionCrud
