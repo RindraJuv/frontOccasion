@@ -8,7 +8,7 @@ const InputGroup = () => {
     labels: [],
     datasets: [
       {
-        label: "Nombre d'annonces vendues",
+        label: 'Nombre d annonces vendues',
         backgroundColor: 'transparent',
         borderColor: 'rgba(255, 99, 132, 0.2)',
         pointBackgroundColor: 'rgba(255, 99, 132, 1)',
@@ -49,7 +49,7 @@ const InputGroup = () => {
 
   return (
     <>
-      <h1>Nombre d'annonces vendues</h1>
+      <h1>Nombre d annonces vendues</h1>
       <CCard className="mb-4">
         <CCardBody>
           <CChartLine

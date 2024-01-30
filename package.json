@@ -46,11 +46,14 @@
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
+    "eslint": "^8.56.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.2.4",
     "react-scripts": "^5.0.1",
     "sass": "^1.63.6",
     "web-vitals": "^3.3.2"
@@ -59,4 +62,5 @@
     "node": ">=10",
     "npm": ">=6"
   }
+  
 }

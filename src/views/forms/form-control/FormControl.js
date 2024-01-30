@@ -8,7 +8,7 @@ const StatsComponent = () => {
     labels: [],
     datasets: [
       {
-        label: "Nombre d'utilisateurs inscrits",
+        label: 'Nombre d utilisateurs inscrits',
         backgroundColor: 'transparent',
         borderColor: 'rgba(255, 99, 132, 0.2)',
         pointBackgroundColor: 'rgba(255, 99, 132, 1)',
@@ -29,7 +29,7 @@ const StatsComponent = () => {
       const response = await axios.get('https://occasion1-production.up.railway.app/userstats')
       const data = response.data
 
-      const labels = data.map((entry) => `${entry.monthAbbreviated} ${entry.year}`)
+      const labels = data.map((entry) => '${entry.monthAbbreviated} ${entry.year}')
       const registrations = data.map((entry) => entry.numberOfRegistrations)
 
       console.log('Labels:', labels)
@@ -52,7 +52,7 @@ const StatsComponent = () => {
 
   return (
     <>
-      <h1>Nombre d'utilisateurs inscrits</h1>
+      <h1>Nombre d utilisateurs inscrits</h1>
       <CCard className="mb-4">
         <CCardBody>
           <CChartLine
